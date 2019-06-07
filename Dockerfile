@@ -6,4 +6,3 @@ RUN apk add openrc
 RUN apk add git
 
 RUN rc-update add docker boot
-RUN service docker start
