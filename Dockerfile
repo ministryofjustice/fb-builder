@@ -18,6 +18,9 @@ RUN pip3 install awscli
 ADD https://storage.googleapis.com/kubernetes-release/release/v1.14.0/bin/linux/amd64/kubectl /usr/local/bin/kubectl
 RUN chmod +x /usr/local/bin/kubectl
 
+RUN mkdir -p ~/builder/downloads
+RUN cd ~/builder/downloads && wget https://get.helm.sh/helm-v2.14.1-linux-amd64.tar.gz && tar -zxvf helm-v2.14.1-linux-amd64.tar.gz && mv linux-amd64/helm /usr/local/bin/helm
+
 RUN mkdir -p ~/.ssh
 RUN ssh-keyscan github.com > ~/.ssh/known_hosts
 
