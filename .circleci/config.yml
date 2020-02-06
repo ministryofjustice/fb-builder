@@ -1,42 +1,15 @@
-version: 2
-jobs:
-  build:
-    working_directory: ~/circle
-    docker:
-      - image: alpine:latest
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run:
-          name: apk update
-          command: 'apk update'
-      - run:
-          name: install docker
-          command: 'apk add docker'
-      - run:
-          name: install openrc
-          command: 'apk add openrc'
-      - run:
-          name: install aws
-          command: 'apk add python3 && pip3 install --upgrade pip && pip3 install awscli'
-      - run:
-          name: start docker
-          command: 'rc-update add docker boot'
-      - run:
-          name: login to AWS ECR
-          command: 'eval $(aws ecr get-login --no-include-email --region eu-west-2) > /dev/null'
-      - run:
-          name: docker build
-          command: 'docker build -t $REPO_URL:latest .'
-      - run:
-          name: docker push
-          command: 'docker push $REPO_URL:latest'
+orbs:
+  aws-ecr: circleci/aws-ecr@6.7.0
+version: 2.1
 
 workflows:
   version: 2
-  build:
+  build_and_push_image:
     jobs:
-      - build:
-          filters:
-            branches:
-              only: master
+      - aws-ecr/build-and-push-image:
+          account-url: AWS_ECR_ACCOUNT_URL
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          region: AWS_DEFAULT_REGION
+          repo: formbuilder/fb-builder
+          tag: 'latest'
