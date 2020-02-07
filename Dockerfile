@@ -30,3 +30,6 @@ RUN git clone https://github.com/AGWA/git-crypt.git ~/builder/git/git-crypt
 RUN cd ~/builder/git/git-crypt && make && make install
 
 RUN rc-update add docker boot
+
+ARG UID=1001
+RUN addgroup -g ${UID} -S appgroup && adduser -u ${UID} -S appuser -G appgroup
