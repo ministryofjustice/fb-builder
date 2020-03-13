@@ -9,7 +9,7 @@ RUN apk add docker-compose
 RUN apk add openrc
 RUN apk add openssh
 RUN apk add git
-RUN apk add nodejs
+RUN apk add nodejs@13.10.1
 RUN apk add npm
 RUN apk add make
 RUN apk add build-base
