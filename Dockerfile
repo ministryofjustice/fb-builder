@@ -17,6 +17,7 @@ RUN apk add openssl-dev
 RUN apk add ruby
 RUN apk add python3
 RUN apk add py3-pip
+RUN apk add jq
 RUN pip3 install --upgrade pip
 RUN pip3 install --ignore-installed awscli
 
