@@ -16,10 +16,12 @@ RUN apk add build-base
 RUN apk add openssl-dev
 RUN apk add ruby
 RUN apk add python3
+RUN apk add py3-pip
 RUN pip3 install --upgrade pip
 RUN pip3 install --ignore-installed awscli
 
-ADD https://storage.googleapis.com/kubernetes-release/release/v1.14.0/bin/linux/amd64/kubectl /usr/local/bin/kubectl
+ADD https://storage.googleapis.com/kubernetes-release/release/v1.17.8/bin/linux/amd64/kubectl /usr/local/bin/kubectl
+
 RUN chmod +x /usr/local/bin/kubectl
 
 RUN mkdir -p ~/builder/downloads
