@@ -18,6 +18,7 @@ RUN apk add ruby
 RUN apk add python3
 RUN apk add py3-pip
 RUN apk add jq
+RUN apk add curl
 RUN pip3 install --upgrade pip
 RUN pip3 install --ignore-installed awscli
 
