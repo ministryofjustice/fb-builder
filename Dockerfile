@@ -15,6 +15,8 @@ RUN apk add make
 RUN apk add build-base
 RUN apk add openssl-dev
 RUN apk add ruby
+RUN apk add ruby-dev
+RUN gem install bundler
 RUN apk add python3
 RUN apk add py3-pip
 RUN apk add jq
