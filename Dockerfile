@@ -14,8 +14,8 @@ RUN apk add npm
 RUN apk add make
 RUN apk add build-base
 RUN apk add openssl-dev
-RUN apk add ruby
-RUN apk add ruby-dev
+RUN apk add ruby=2.7.2-r0
+RUN apk add ruby-dev=2.7.2-r0
 RUN gem install bundler
 RUN apk add python3
 RUN apk add py3-pip
