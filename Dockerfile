@@ -3,6 +3,7 @@ FROM alpine:edge
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 
 RUN apk update
+RUN apk add shared-mime-info
 RUN apk add bash
 RUN apk add docker
 RUN apk add docker-compose
@@ -14,8 +15,8 @@ RUN apk add npm
 RUN apk add make
 RUN apk add build-base
 RUN apk add openssl-dev
-RUN apk add ruby=2.7.2-r0
-RUN apk add ruby-dev=2.7.2-r0
+RUN apk add ruby=2.7.2-r3
+RUN apk add ruby-dev=2.7.2-r3
 RUN gem install bundler
 RUN apk add python3
 RUN apk add py3-pip
