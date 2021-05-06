@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:3.13
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 
@@ -14,8 +14,8 @@ RUN apk add npm
 RUN apk add make
 RUN apk add build-base
 RUN apk add openssl-dev
-RUN apk add ruby=2.7.2-r0
-RUN apk add ruby-dev=2.7.2-r0
+RUN apk add ruby=2.7.3-r0
+RUN apk add ruby-dev=2.7.3-r0
 RUN gem install bundler
 RUN apk add python3
 RUN apk add py3-pip
@@ -23,13 +23,16 @@ RUN apk add jq
 RUN apk add curl
 RUN pip3 install --upgrade pip
 RUN pip3 install --ignore-installed awscli
+RUN rm -rf /var/cache/apk/*
 
 ADD https://storage.googleapis.com/kubernetes-release/release/v1.17.8/bin/linux/amd64/kubectl /usr/local/bin/kubectl
 
 RUN chmod +x /usr/local/bin/kubectl
 
 RUN mkdir -p ~/builder/downloads
-RUN cd ~/builder/downloads && wget https://get.helm.sh/helm-v2.14.1-linux-amd64.tar.gz && tar -zxvf helm-v2.14.1-linux-amd64.tar.gz && mv linux-amd64/helm /usr/local/bin/helm
+RUN cd ~/builder/downloads && wget https://get.helm.sh/helm-v3.5.4-linux-amd64.tar.gz && \
+    tar -zxvf helm-v3.5.4-linux-amd64.tar.gz && \
+    mv linux-amd64/helm /usr/local/bin/helm
 
 RUN mkdir -p ~/.ssh
 RUN ssh-keyscan github.com > ~/.ssh/known_hosts
