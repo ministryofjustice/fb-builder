@@ -25,7 +25,7 @@ RUN pip3 install --upgrade pip
 RUN pip3 install --ignore-installed awscli
 RUN rm -rf /var/cache/apk/*
 
-ADD https://storage.googleapis.com/kubernetes-release/release/v1.17.8/bin/linux/amd64/kubectl /usr/local/bin/kubectl
+ADD https://storage.googleapis.com/kubernetes-release/release/v1.18.18/bin/linux/amd64/kubectl /usr/local/bin/kubectl
 
 RUN chmod +x /usr/local/bin/kubectl
 
