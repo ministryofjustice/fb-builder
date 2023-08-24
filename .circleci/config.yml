@@ -6,6 +6,8 @@ workflows:
   build-docker-image-only:
     jobs:
       - docker/publish:
+          context:
+            - moj-forms
           deploy: false
           image:  ministryofjustice/fb-builder
           filters:
@@ -17,6 +19,8 @@ workflows:
   build-docker-image:
     jobs:
       - docker/publish:
+          context:
+            - moj-forms
           image: ministryofjustice/fb-builder
           tag: 'latest'
           filters:
