@@ -3,6 +3,17 @@ orbs:
   docker: circleci/docker@2.2.0
 
 workflows:
+  build-docker-image-only:
+    jobs:
+      - docker/publish:
+          deploy: false
+          image:  ministryofjustice/fb-builder
+          filters:
+            branches:
+              ignore:
+                - main
+                - master
+
   build-docker-image:
     jobs:
       - docker/publish:
@@ -13,4 +24,4 @@ workflows:
               only:
                 - main
                 - master
-                
+
