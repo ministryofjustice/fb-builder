@@ -1,46 +1,28 @@
-FROM alpine:3.13
+FROM alpine:latest
 
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/latest-stable/main" >> /etc/apk/repositories
 
 RUN apk update
-RUN apk add bash
-RUN apk add docker
-RUN apk add docker-compose
-RUN apk add openrc
-RUN apk add openssh
-RUN apk add git
-RUN apk add nodejs
-RUN apk add npm
-RUN apk add make
-RUN apk add build-base
-RUN apk add openssl-dev
-RUN apk add ruby=2.7.3-r0
-RUN apk add ruby-dev=2.7.3-r0
+RUN apk add bash build-base curl docker docker-compose git git-crypt make nodejs npm openrc openssh openssl-dev
+RUN apk add ruby ruby-dev
 RUN gem install bundler
-RUN apk add python3
-RUN apk add py3-pip
-RUN apk add jq
-RUN apk add curl
+RUN apk add python3 py3-pip jq
 RUN pip3 install --upgrade pip
 RUN pip3 install --ignore-installed awscli
+
 RUN rm -rf /var/cache/apk/*
 
-ADD https://storage.googleapis.com/kubernetes-release/release/v1.18.18/bin/linux/amd64/kubectl /usr/local/bin/kubectl
-
-RUN chmod +x /usr/local/bin/kubectl
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
+    chmod +x ./kubectl && \
+    mv ./kubectl /usr/local/bin
 
 RUN mkdir -p ~/builder/downloads
-RUN cd ~/builder/downloads && wget https://get.helm.sh/helm-v3.5.4-linux-amd64.tar.gz && \
-    tar -zxvf helm-v3.5.4-linux-amd64.tar.gz && \
-    mv linux-amd64/helm /usr/local/bin/helm
+RUN cd ~/builder/downloads && wget https://get.helm.sh/helm-v3.12.2-linux-amd64.tar.gz && \
+     tar -zxvf helm-v3.12.2-linux-amd64.tar.gz && \
+     mv linux-amd64/helm /usr/local/bin/helm
 
-RUN mkdir -p ~/.ssh
-RUN ssh-keyscan github.com > ~/.ssh/known_hosts
-
-RUN mkdir -p ~/builder/git
-RUN git clone https://github.com/AGWA/git-crypt.git ~/builder/git/git-crypt
-
-RUN cd ~/builder/git/git-crypt && make && make install
+RUN mkdir -p ~/.ssh && \
+    ssh-keyscan github.com > ~/.ssh/known_hosts
 
 RUN rc-update add docker boot
 
