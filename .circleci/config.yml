@@ -1,15 +1,31 @@
-orbs:
-  aws-ecr: circleci/aws-ecr@7.0.0
 version: 2.1
+orbs:
+  docker: circleci/docker@2.2.0
 
 workflows:
-  version: 2
-  build_and_push_image:
+  build-docker-image-only:
     jobs:
-      - aws-ecr/build-and-push-image:
-          account-url: AWS_ECR_ACCOUNT_URL
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          region: AWS_DEFAULT_REGION
-          repo: formbuilder/fb-builder
-          tag: 'latest'
+      - docker/check
+      - docker/build:
+        image: 'ministryofjustice/fb-builder'
+        tag: 'latest'
+      - docker/push:
+        image: 'ministryofjustice/fb-builder'
+        tag: 'latest'
+
+
+
+
+
+
+
+
+  # build_and_push_image:
+  #   jobs:
+  #     - aws-ecr/build-and-push-image:
+  #         account-url: AWS_ECR_ACCOUNT_URL
+  #         aws-access-key-id: AWS_ACCESS_KEY_ID
+  #         aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+  #         region: AWS_DEFAULT_REGION
+  #         repo: formbuilder/fb-builder
+  #         tag: 'latest'
