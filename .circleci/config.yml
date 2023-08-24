@@ -3,15 +3,12 @@ orbs:
   docker: circleci/docker@2.2.0
 
 workflows:
-  build-docker-image-only:
+  build-docker-image:
     jobs:
-      - docker/check
-      - docker/build:
-        image: 'ministryofjustice/fb-builder'
-        tag: 'latest'
-      - docker/push:
-        image: 'ministryofjustice/fb-builder'
-        tag: 'latest'
+      - docker/publish:
+          image: ministryofjustice/fb-builder
+          tag: 'latest'
+
 
 
 
