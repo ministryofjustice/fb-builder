@@ -10,11 +10,11 @@ workflows:
             - moj-forms
           deploy: false
           image:  ministryofjustice/fb-builder
-          # filters:
-          #   branches:
-          #     ignore:
-          #       - main
-          #       - master
+          filters:
+            branches:
+              ignore:
+                - main
+                - master
 
   build-docker-image:
     jobs:
@@ -23,9 +23,9 @@ workflows:
             - moj-forms
           image: ministryofjustice/fb-builder
           tag: 'latest'
-          # filters:
-          #   branches:
-          #     only:
-          #       - main
-          #       - master
+          filters:
+            branches:
+              only:
+                - main
+                - master
 
