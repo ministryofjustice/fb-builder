@@ -17,8 +17,8 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s
     mv ./kubectl /usr/local/bin
 
 RUN mkdir -p ~/builder/downloads
-RUN cd ~/builder/downloads && wget https://get.helm.sh/helm-v3.12.2-linux-amd64.tar.gz && \
-     tar -zxvf helm-v3.12.2-linux-amd64.tar.gz && \
+RUN cd ~/builder/downloads && wget https://get.helm.sh/helm-v4.0.0-linux-amd64.tar.gz && \
+     tar -zxvf helm-v4.0.0-linux-amd64.tar.gz && \
      mv linux-amd64/helm /usr/local/bin/helm
 
 RUN mkdir -p ~/.ssh && \
