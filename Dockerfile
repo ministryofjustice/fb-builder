@@ -1,7 +1,4 @@
-FROM alpine:latest
-
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/latest-stable/main" >> /etc/apk/repositories
-
+FROM alpine:3.22.4
 RUN apk update
 RUN apk add --no-cache bash build-base curl docker docker-compose git git-crypt \
     make nodejs npm openrc openssh openssl-dev \
